@@ -100,6 +100,11 @@
             color: #065f46;
         }
         
+        .status-error {
+            background-color: #fee2e2;
+            color: #b91c1c;
+        }
+        
         .main-content {
             flex: 1;
             display: flex;
@@ -271,77 +276,62 @@
             margin-bottom: 30px;
         }
         
-        .example-prompts {
+        .feature-cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 10px;
-            max-width: 600px;
+            gap: 15px;
             width: 100%;
+            max-width: 800px;
+            margin-bottom: 30px;
         }
         
-        .example-prompt {
+        .feature-card {
             background-color: white;
-            border: 1px solid var(--border-color);
             border-radius: 8px;
-            padding: 12px;
-            text-align: left;
-            cursor: pointer;
-            transition: all 0.2s;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
         }
         
-        .example-prompt:hover {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
-        .example-prompt-title {
-            font-weight: 500;
-            margin-bottom: 5px;
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #eef2ff;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            color: var(--primary-color);
         }
         
-        .example-prompt-text {
+        .feature-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .feature-description {
             font-size: 0.875rem;
             color: #64748b;
         }
         
         .message {
-            display: flex;
             margin-bottom: 20px;
-            animation: fadeIn 0.3s ease-in-out;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            display: flex;
+            align-items: flex-start;
         }
         
         .message.user {
             flex-direction: row-reverse;
         }
         
-        .message-avatar {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            flex-shrink: 0;
-            margin: 0 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .user .message-avatar {
-            background-color: var(--user-message-bg);
-            color: white;
-        }
-        
-        .assistant .message-avatar {
-            background-color: var(--assistant-message-bg);
-            color: var(--text-color);
-        }
-        
         .message-content {
-            max-width: 70%;
+            max-width: 80%;
             padding: 12px 16px;
             border-radius: 18px;
             line-height: 1.5;
@@ -354,10 +344,80 @@
         }
         
         .assistant .message-content {
-            background-color: white;
+            background-color: var(--assistant-message-bg);
             color: var(--text-color);
             border-bottom-left-radius: 4px;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .message-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 10px;
+            flex-shrink: 0;
+        }
+        
+        .user .message-avatar {
+            background-color: var(--user-message-bg);
+            color: white;
+        }
+        
+        .assistant .message-avatar {
+            background-color: var(--assistant-message-bg);
+            color: var(--text-color);
+        }
+        
+        .input-container {
+            padding: 20px;
+            background-color: white;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .input-wrapper {
+            display: flex;
+            align-items: flex-end;
+            gap: 10px;
+        }
+        
+        .chat-input {
+            flex: 1;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px 15px;
+            resize: none;
+            outline: none;
+            transition: border-color 0.2s;
+            max-height: 150px;
+        }
+        
+        .chat-input:focus {
+            border-color: var(--primary-color);
+        }
+        
+        .send-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .send-button:hover {
+            background-color: #5558e3;
+        }
+        
+        .send-button:disabled {
+            background-color: #c7d2fe;
+            cursor: not-allowed;
         }
         
         .typing-indicator {
@@ -366,8 +426,8 @@
         }
         
         .typing-indicator span {
-            height: 8px;
-            width: 8px;
+            height: 10px;
+            width: 10px;
             background-color: #9ca3af;
             border-radius: 50%;
             display: inline-block;
@@ -392,361 +452,67 @@
             }
         }
         
-        .input-container {
-            padding: 20px;
-            background-color: white;
-            border-top: 1px solid var(--border-color);
-        }
-        
-        .input-wrapper {
-            position: relative;
-            display: flex;
-            align-items: flex-end;
-            background-color: #f8fafc;
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 12px;
-            transition: border-color 0.2s;
-        }
-        
-        .input-wrapper:focus-within {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
-        }
-        
-        .chat-input {
-            flex: 1;
-            border: none;
-            background: none;
-            outline: none;
-            resize: none;
-            max-height: 200px;
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-        
-        .send-button {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            margin-left: 10px;
-            transition: background-color 0.2s;
-        }
-        
-        .send-button:hover {
-            background-color: #5558e3;
-        }
-        
-        .send-button:disabled {
-            background-color: #c7d2fe;
-            cursor: not-allowed;
-        }
-        
-        .settings-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            padding: 20px;
-        }
-        
-        .settings-content {
-            background-color: white;
-            border-radius: 12px;
-            width: 100%;
-            max-width: 500px;
-            max-height: 90vh;
-            overflow-y: auto;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-        
-        .settings-header {
-            padding: 20px;
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .settings-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin: 0;
-        }
-        
-        .settings-close {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: #64748b;
-            cursor: pointer;
-            padding: 0;
-            width: 32px;
-            height: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 4px;
-            transition: background-color 0.2s;
-        }
-        
-        .settings-close:hover {
-            background-color: #f1f5f9;
-        }
-        
-        .settings-body {
-            padding: 20px;
-        }
-        
-        .settings-section {
-            margin-bottom: 25px;
-        }
-        
-        .settings-section-title {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .form-group {
-            margin-bottom: 15px;
-        }
-        
-        .form-label {
-            display: block;
-            font-weight: 500;
-            margin-bottom: 8px;
-            font-size: 0.875rem;
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 10px 12px;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            font-size: 0.95rem;
-            transition: border-color 0.2s;
-        }
-        
-        .form-control:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
-        }
-        
-        .form-text {
-            font-size: 0.75rem;
-            color: #64748b;
-            margin-top: 5px;
-        }
-        
-        .settings-footer {
-            padding: 15px 20px;
-            border-top: 1px solid var(--border-color);
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-        }
-        
-        .btn {
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-weight: 500;
-            cursor: pointer;
-            border: none;
-            font-size: 0.875rem;
-            transition: all 0.2s;
-        }
-        
-        .btn-secondary {
-            background-color: #f1f5f9;
-            color: var(--text-color);
-        }
-        
-        .btn-secondary:hover {
-            background-color: #e2e8f0;
-        }
-        
-        .btn-primary {
-            background-color: var(--primary-color);
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            background-color: #5558e3;
-        }
-        
-        .api-status {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-        }
-        
-        .api-status.demo {
-            background-color: #fef3c7;
-            color: #92400e;
-        }
-        
-        .api-status.connected {
-            background-color: #d1fae5;
-            color: #065f46;
-        }
-        
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background-color: currentColor;
-        }
-        
-        .feature-card {
-            background-color: #f8fafc;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 15px;
-            border: 1px solid var(--border-color);
-        }
-        
-        .feature-title {
-            font-weight: 500;
-            margin-bottom: 5px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .feature-description {
-            font-size: 0.875rem;
-            color: #64748b;
-        }
-        
-        .notification {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: white;
-            border-radius: 8px;
-            padding: 15px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            max-width: 350px;
-            transform: translateY(100px);
-            opacity: 0;
-            transition: all 0.3s ease;
-            z-index: 1001;
-        }
-        
-        .notification.show {
-            transform: translateY(0);
-            opacity: 1;
-        }
-        
-        .notification-icon {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-        
-        .notification.success .notification-icon {
-            background-color: #d1fae5;
-            color: #065f46;
-        }
-        
-        .notification.error .notification-icon {
+        .error-message {
             background-color: #fee2e2;
             color: #b91c1c;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            display: none;
         }
         
-        .notification.info .notification-icon {
-            background-color: #dbeafe;
-            color: #1d4ed8;
-        }
-        
-        .notification-content {
-            flex: 1;
-        }
-        
-        .notification-title {
-            font-weight: 500;
-            margin-bottom: 2px;
-        }
-        
-        .notification-message {
-            font-size: 0.875rem;
-            color: #64748b;
-        }
-        
-        .notification-close {
-            background: none;
-            border: none;
-            color: #64748b;
-            cursor: pointer;
-            padding: 0;
-            width: 24px;
-            height: 24px;
+        .error-title {
+            font-weight: 600;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            border-radius: 4px;
-            transition: background-color 0.2s;
+            gap: 8px;
         }
         
-        .notification-close:hover {
-            background-color: #f1f5f9;
+        .error-actions {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .quota-error {
+            background-color: #fffbeb;
+            color: #92400e;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .quota-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .quota-actions {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .modal {
+            display: none;
+        }
+        
+        .modal.show {
+            display: flex;
         }
         
         @media (max-width: 768px) {
             .sidebar {
-                position: fixed;
-                left: -260px;
-                top: 0;
-                bottom: 0;
-                z-index: 100;
-                transition: left 0.3s ease;
-                box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-            }
-            
-            .sidebar.open {
-                left: 0;
-            }
-            
-            .menu-toggle {
-                display: block;
+                display: none;
             }
             
             .message-content {
-                max-width: 85%;
-            }
-        }
-        
-        @media (min-width: 769px) {
-            .menu-toggle {
-                display: none;
+                max-width: 90%;
             }
         }
     </style>
@@ -756,7 +522,7 @@
         <header class="app-header">
             <div class="logo">
                 <div class="logo-icon">
-                    <i class="bi bi-cpu"></i>
+                    <i class="bi bi-robot"></i>
                 </div>
                 <div>
                     <h1 class="app-title">AI Agent Tool</h1>
@@ -765,40 +531,45 @@
             </div>
             <div class="header-actions">
                 <div class="status-badge status-demo" id="statusBadge">
-                    <span class="status-dot"></span>
-                    <span>Demo Mode</span>
+                    <i class="bi bi-circle-fill"></i> Demo Mode
                 </div>
-                <button class="btn btn-primary" id="apiSettingsBtn">
-                    <i class="bi bi-key me-1"></i> API Settings
+                <button class="btn btn-sm btn-outline-primary" id="apiKeyBtn">
+                    <i class="bi bi-key"></i> API Key
+                </button>
+                <button class="btn btn-sm btn-outline-secondary" id="settingsButton">
+                    <i class="bi bi-gear"></i>
                 </button>
             </div>
         </header>
         
         <div class="main-content">
-            <aside class="sidebar" id="sidebar">
+            <aside class="sidebar">
                 <div class="sidebar-header">
                     <button class="new-chat-btn" id="newChatBtn">
-                        <i class="bi bi-plus-lg"></i>
-                        <span>New Chat</span>
+                        <i class="bi bi-plus-lg"></i> New Chat
                     </button>
                 </div>
                 <div class="chat-history" id="chatHistory">
-                    <!-- Chat history items will be added here dynamically -->
+                    <div class="chat-history-item active">
+                        <i class="bi bi-chat-dots chat-history-icon"></i>
+                        <div class="chat-history-title">Welcome to AI Agent</div>
+                    </div>
                 </div>
             </aside>
             
             <main class="chat-container">
                 <div class="chat-header">
-                    <button class="action-btn menu-toggle" id="menuToggle">
-                        <i class="bi bi-list"></i>
-                    </button>
-                    <h2 class="chat-title" id="chatTitle">New Conversation</h2>
+                    <h2 class="chat-title">
+                        <i class="bi bi-chat-dots"></i>
+                        Welcome to AI Agent
+                    </h2>
+                    <div class="model-selector" id="currentModel">Demo Mode</div>
                     <div class="chat-actions">
-                        <button class="action-btn" id="clearChatBtn" title="Clear conversation">
+                        <button class="action-btn" title="Clear chat">
                             <i class="bi bi-trash"></i>
                         </button>
-                        <button class="action-btn" id="settingsBtn" title="Settings">
-                            <i class="bi bi-gear"></i>
+                        <button class="action-btn" title="Export chat">
+                            <i class="bi bi-download"></i>
                         </button>
                     </div>
                 </div>
@@ -806,29 +577,61 @@
                 <div class="messages-container" id="messagesContainer">
                     <div class="welcome-screen" id="welcomeScreen">
                         <div class="welcome-icon">
-                            <i class="bi bi-chat-dots"></i>
+                            <i class="bi bi-robot"></i>
                         </div>
-                        <h3 class="welcome-title">How can I help you today?</h3>
+                        <h3 class="welcome-title">Welcome to AI Agent Tool</h3>
                         <p class="welcome-description">
-                            I'm your AI assistant. I can help you with a variety of tasks, from answering questions to generating creative content.
+                            Experience the power of AI with this intelligent assistant. Add your API key to connect to OpenAI's models or try the demo mode.
                         </p>
-                        <div class="example-prompts">
-                            <div class="example-prompt" data-prompt="Explain quantum computing in simple terms">
-                                <div class="example-prompt-title">Explain complex concepts</div>
-                                <div class="example-prompt-text">Explain quantum computing in simple terms</div>
+                        
+                        <div class="feature-cards">
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="bi bi-lightning-charge"></i>
+                                </div>
+                                <h4 class="feature-title">Fast Responses</h4>
+                                <p class="feature-description">Get quick and accurate answers to your questions</p>
                             </div>
-                            <div class="example-prompt" data-prompt="Write a poem about artificial intelligence">
-                                <div class="example-prompt-title">Get creative</div>
-                                <div class="example-prompt-text">Write a poem about artificial intelligence</div>
+                            
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="bi bi-shield-check"></i>
+                                </div>
+                                <h4 class="feature-title">Secure & Private</h4>
+                                <p class="feature-description">Your data is processed securely and never stored</p>
                             </div>
-                            <div class="example-prompt" data-prompt="Help me plan a trip to Japan">
-                                <div class="example-prompt-title">Plan something</div>
-                                <div class="example-prompt-text">Help me plan a trip to Japan</div>
+                            
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="bi bi-gear"></i>
+                                </div>
+                                <h4 class="feature-title">Customizable</h4>
+                                <p class="feature-description">Adjust settings to match your preferences</p>
                             </div>
-                            <div class="example-prompt" data-prompt="What are the latest developments in AI?">
-                                <div class="example-prompt-title">Learn something new</div>
-                                <div class="example-prompt-text">What are the latest developments in AI?</div>
-                            </div>
+                        </div>
+                        
+                        <div class="d-flex gap-3">
+                            <button class="btn btn-primary" id="getStartedBtn">
+                                <i class="bi bi-play-circle me-2"></i> Get Started
+                            </button>
+                            <button class="btn btn-outline-primary" id="apiKeySetupBtn">
+                                <i class="bi bi-key me-2"></i> Set Up API Key
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="quota-error" id="quotaError">
+                        <div class="quota-title">
+                            <i class="bi bi-exclamation-triangle"></i> API Quota Exceeded
+                        </div>
+                        <p>You've exceeded your current API quota. This happens when you've reached the usage limit of your OpenAI plan.</p>
+                        <div class="quota-actions">
+                            <button class="btn btn-warning" id="upgradePlanBtn">
+                                <i class="bi bi-credit-card me-2"></i> Upgrade Plan
+                            </button>
+                            <button class="btn btn-outline-secondary" id="switchToDemoBtn">
+                                <i class="bi bi-arrow-repeat me-2"></i> Switch to Demo Mode
+                            </button>
                         </div>
                     </div>
                     
@@ -841,7 +644,7 @@
                 
                 <div class="input-container">
                     <div class="input-wrapper">
-                        <textarea class="chat-input" id="chatInput" placeholder="Message AI Agent..." rows="1"></textarea>
+                        <textarea class="chat-input" id="chatInput" placeholder="Type your message here..." rows="1"></textarea>
                         <button class="send-button" id="sendButton">
                             <i class="bi bi-send"></i>
                         </button>
@@ -851,322 +654,255 @@
         </div>
     </div>
     
-    <div class="settings-modal" id="apiSettingsModal">
-        <div class="settings-content">
-            <div class="settings-header">
-                <h3 class="settings-title">API Settings</h3>
-                <button class="settings-close" id="closeApiSettings">
-                    <i class="bi bi-x"></i>
-                </button>
-            </div>
-            <div class="settings-body">
-                <div class="api-status demo" id="apiStatus">
-                    <span class="status-dot"></span>
-                    <span>Currently running in demo mode with simulated responses</span>
+    <!-- API Key Modal -->
+    <div class="modal fade" id="apiKeyModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">OpenAI API Key</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                
-                <div class="settings-section">
-                    <h4 class="settings-section-title">
-                        <i class="bi bi-key"></i>
-                        OpenAI API Key
-                    </h4>
-                    <div class="form-group">
-                        <label class="form-label" for="apiKeyInput">API Key</label>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="apiKeyInput" class="form-label">Enter your OpenAI API Key</label>
                         <input type="password" class="form-control" id="apiKeyInput" placeholder="sk-...">
                         <div class="form-text">Your API key is stored locally and never sent to any server except OpenAI.</div>
                     </div>
+                    <div class="alert alert-info">
+                        <i class="bi bi-info-circle"></i> You can get your API key from the OpenAI dashboard at platform.openai.com
+                    </div>
                 </div>
-                
-                <div class="settings-section">
-                    <h4 class="settings-section-title">
-                        <i class="bi bi-cpu"></i>
-                        Model Selection
-                    </h4>
-                    <div class="form-group">
-                        <label class="form-label" for="modelSelect">AI Model</label>
-                        <select class="form-control" id="modelSelect">
-                            <option value="gpt-3.5-turbo">GPT-3.5 Turbo (Recommended)</option>
-                            <option value="gpt-4">GPT-4 (More capable)</option>
-                            <option value="gpt-4-turbo">GPT-4 Turbo (Latest)</option>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="saveApiKeyBtn">Save API Key</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Settings Modal -->
+    <div class="modal fade" id="settingsModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Settings</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="modelSelect" class="form-label">AI Model</label>
+                        <select class="form-select" id="modelSelect">
+                            <option value="gpt-3.5-turbo">GPT-3.5 Turbo</option>
+                            <option value="gpt-4">GPT-4</option>
+                            <option value="gpt-4-turbo">GPT-4 Turbo</option>
                         </select>
                     </div>
-                </div>
-                
-                <div class="settings-section">
-                    <h4 class="settings-section-title">
-                        <i class="bi bi-person-gear"></i>
-                        System Prompt
-                    </h4>
-                    <div class="form-group">
-                        <label class="form-label" for="systemPrompt">Assistant Behavior</label>
-                        <textarea class="form-control" id="systemPrompt" rows="3">You are a helpful assistant. Be concise and helpful in your responses.</textarea>
-                        <div class="form-text">This defines how the AI assistant behaves.</div>
+                    <div class="mb-3">
+                        <label for="systemPrompt" class="form-label">System Prompt</label>
+                        <textarea class="form-control" id="systemPrompt" rows="3">You are a helpful assistant.</textarea>
+                        <div class="form-text">Customize how the AI behaves by changing the system prompt.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="temperatureSlider" class="form-label">Creativity: <span id="temperatureValue">0.7</span></label>
+                        <input type="range" class="form-range" id="temperatureSlider" min="0" max="1" step="0.1" value="0.7">
+                        <div class="form-text">Higher values make the output more creative, lower values more focused.</div>
                     </div>
                 </div>
-                
-                <div class="settings-section">
-                    <h4 class="settings-section-title">
-                        <i class="bi bi-info-circle"></i>
-                        Demo vs. Full Mode
-                    </h4>
-                    <div class="feature-card">
-                        <div class="feature-title">
-                            <i class="bi bi-play-circle"></i>
-                            Demo Mode
-                        </div>
-                        <div class="feature-description">
-                            Use the tool without an API key. Responses are simulated and may not be as accurate or comprehensive.
-                        </div>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-title">
-                            <i class="bi bi-star"></i>
-                            Full Mode
-                        </div>
-                        <div class="feature-description">
-                            Connect to OpenAI's API with your own key for more accurate, comprehensive, and up-to-date responses.
-                        </div>
-                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="saveSettingsBtn">Save Settings</button>
                 </div>
-            </div>
-            <div class="settings-footer">
-                <button class="btn btn-secondary" id="disconnectApiBtn" style="display: none;">Disconnect</button>
-                <button class="btn btn-primary" id="saveApiSettingsBtn">Save Settings</button>
             </div>
         </div>
     </div>
     
-    <div class="notification" id="notification">
-        <div class="notification-icon">
-            <i class="bi bi-check"></i>
+    <!-- Toast Notification -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="toastNotification" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <i id="toastIcon" class="bi bi-info-circle-fill text-primary me-2"></i>
+                <strong id="toastHeader" class="me-auto">Notification</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body" id="toastMessage">
+                Notification message
+            </div>
         </div>
-        <div class="notification-content">
-            <div class="notification-title">Success</div>
-            <div class="notification-message">Settings saved successfully</div>
-        </div>
-        <button class="notification-close">
-            <i class="bi bi-x"></i>
-        </button>
     </div>
-    
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // DOM Elements
-            const messagesContainer = document.getElementById('messagesContainer');
+            const statusBadge = document.getElementById('statusBadge');
+            const currentModelBadge = document.getElementById('currentModel');
+            const apiKeyBtn = document.getElementById('apiKeyBtn');
+            const settingsButton = document.getElementById('settingsButton');
+            const newChatBtn = document.getElementById('newChatBtn');
+            const getStartedBtn = document.getElementById('getStartedBtn');
+            const apiKeySetupBtn = document.getElementById('apiKeySetupBtn');
             const chatInput = document.getElementById('chatInput');
             const sendButton = document.getElementById('sendButton');
+            const messagesContainer = document.getElementById('messagesContainer');
             const welcomeScreen = document.getElementById('welcomeScreen');
             const typingIndicator = document.getElementById('typingIndicator');
-            const apiSettingsModal = document.getElementById('apiSettingsModal');
-            const apiSettingsBtn = document.getElementById('apiSettingsBtn');
-            const closeApiSettings = document.getElementById('closeApiSettings');
-            const saveApiSettingsBtn = document.getElementById('saveApiSettingsBtn');
-            const disconnectApiBtn = document.getElementById('disconnectApiBtn');
+            const quotaError = document.getElementById('quotaError');
+            const upgradePlanBtn = document.getElementById('upgradePlanBtn');
+            const switchToDemoBtn = document.getElementById('switchToDemoBtn');
+            
+            // Modal Elements
+            const apiKeyModal = new bootstrap.Modal(document.getElementById('apiKeyModal'));
+            const settingsModal = new bootstrap.Modal(document.getElementById('settingsModal'));
             const apiKeyInput = document.getElementById('apiKeyInput');
+            const saveApiKeyBtn = document.getElementById('saveApiKeyBtn');
             const modelSelect = document.getElementById('modelSelect');
             const systemPrompt = document.getElementById('systemPrompt');
-            const statusBadge = document.getElementById('statusBadge');
-            const apiStatus = document.getElementById('apiStatus');
-            const notification = document.getElementById('notification');
-            const newChatBtn = document.getElementById('newChatBtn');
-            const clearChatBtn = document.getElementById('clearChatBtn');
-            const chatHistory = document.getElementById('chatHistory');
-            const chatTitle = document.getElementById('chatTitle');
-            const menuToggle = document.getElementById('menuToggle');
-            const sidebar = document.getElementById('sidebar');
-            const settingsBtn = document.getElementById('settingsBtn');
+            const temperatureSlider = document.getElementById('temperatureSlider');
+            const temperatureValue = document.getElementById('temperatureValue');
+            const saveSettingsBtn = document.getElementById('saveSettingsBtn');
+            
+            // Toast Elements
+            const toastNotification = new bootstrap.Toast(document.getElementById('toastNotification'));
+            const toastMessage = document.getElementById('toastMessage');
+            const toastHeader = document.getElementById('toastHeader');
+            const toastIcon = document.getElementById('toastIcon');
             
             // State
             let apiKey = localStorage.getItem('openai_api_key') || '';
             let model = localStorage.getItem('openai_model') || 'gpt-3.5-turbo';
-            let systemPromptText = localStorage.getItem('system_prompt') || 'You are a helpful assistant. Be concise and helpful in your responses.';
+            let systemPromptText = localStorage.getItem('system_prompt') || 'You are a helpful assistant.';
+            let temperature = parseFloat(localStorage.getItem('temperature')) || 0.7;
+            let isDemoMode = !apiKey;
             let conversationHistory = [];
-            let chatSessions = JSON.parse(localStorage.getItem('chat_sessions')) || [];
-            let currentSessionId = null;
+            let hasQuotaError = false;
             
-            // Demo responses for when no API key is provided
-            const demoResponses = [
-                "I understand your question. In demo mode, I can provide basic responses, but they're not as comprehensive as when connected to the full AI model.",
-                "That's an interesting point! While in demo mode, I'm limited in my responses. For more detailed and accurate answers, consider adding your OpenAI API key in the settings.",
-                "I'd be happy to help with that! However, I'm currently running in demo mode with simulated responses. For the best experience, add your API key in the settings.",
-                "Thanks for your message! In demo mode, I can provide general responses, but they may not be as accurate or detailed as when connected to the actual AI model.",
-                "I appreciate your question! As a demo, I can give you a basic response. For more in-depth and accurate answers, you'll want to connect to the full AI model with your API key."
-            ];
-            
-            // Initialize
-            updateApiStatus();
-            loadChatSessions();
+            // Initialize UI
+            updateUI();
             
             // Event Listeners
-            sendButton.addEventListener('click', sendMessage);
-            chatInput.addEventListener('keydown', handleKeyDown);
-            apiSettingsBtn.addEventListener('click', openApiSettings);
-            closeApiSettings.addEventListener('click', closeApiSettingsModal);
-            saveApiSettingsBtn.addEventListener('click', saveApiSettings);
-            disconnectApiBtn.addEventListener('click', disconnectApi);
-            newChatBtn.addEventListener('click', startNewChat);
-            clearChatBtn.addEventListener('click', clearCurrentChat);
-            menuToggle.addEventListener('click', toggleSidebar);
-            settingsBtn.addEventListener('click', openApiSettings);
-            
-            // Example prompts
-            document.querySelectorAll('.example-prompt').forEach(prompt => {
-                prompt.addEventListener('click', function() {
-                    const promptText = this.getAttribute('data-prompt');
-                    chatInput.value = promptText;
-                    chatInput.focus();
-                    sendMessage();
-                });
+            apiKeyBtn.addEventListener('click', function() {
+                apiKeyInput.value = apiKey;
+                apiKeyModal.show();
             });
             
-            // Close modal when clicking outside
-            apiSettingsModal.addEventListener('click', function(e) {
-                if (e.target === apiSettingsModal) {
-                    closeApiSettingsModal();
+            settingsButton.addEventListener('click', function() {
+                modelSelect.value = model;
+                systemPrompt.value = systemPromptText;
+                temperatureSlider.value = temperature;
+                temperatureValue.textContent = temperature;
+                settingsModal.show();
+            });
+            
+            saveApiKeyBtn.addEventListener('click', function() {
+                const newApiKey = apiKeyInput.value.trim();
+                if (newApiKey) {
+                    apiKey = newApiKey;
+                    localStorage.setItem('openai_api_key', apiKey);
+                    
+                    // Update status
+                    isDemoMode = false;
+                    hasQuotaError = false;
+                    updateUI();
+                    
+                    // Show success message
+                    showToast('API key saved successfully!', 'Success', 'bi bi-check-circle-fill text-success');
+                    
+                    // Close modal
+                    apiKeyModal.hide();
                 }
+            });
+            
+            saveSettingsBtn.addEventListener('click', function() {
+                model = modelSelect.value;
+                systemPromptText = systemPrompt.value;
+                temperature = parseFloat(temperatureSlider.value);
+                
+                localStorage.setItem('openai_model', model);
+                localStorage.setItem('system_prompt', systemPromptText);
+                localStorage.setItem('temperature', temperature);
+                
+                updateUI();
+                
+                // Show success message
+                showToast('Settings saved successfully!', 'Success', 'bi bi-check-circle-fill text-success');
+                
+                // Close modal
+                settingsModal.hide();
+            });
+            
+            temperatureSlider.addEventListener('input', function() {
+                temperatureValue.textContent = this.value;
+            });
+            
+            newChatBtn.addEventListener('click', function() {
+                if (confirm('Start a new conversation? This will clear the current chat history.')) {
+                    conversationHistory = [];
+                    messagesContainer.innerHTML = '';
+                    welcomeScreen.style.display = 'flex';
+                    updateUI();
+                }
+            });
+            
+            getStartedBtn.addEventListener('click', function() {
+                welcomeScreen.style.display = 'none';
+                chatInput.focus();
+            });
+            
+            apiKeySetupBtn.addEventListener('click', function() {
+                apiKeyModal.show();
+            });
+            
+            sendButton.addEventListener('click', sendMessage);
+            chatInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    sendMessage();
+                }
+            });
+            
+            upgradePlanBtn.addEventListener('click', function() {
+                window.open('https://platform.openai.com/account/billing', '_blank');
+            });
+            
+            switchToDemoBtn.addEventListener('click', function() {
+                isDemoMode = true;
+                hasQuotaError = false;
+                updateUI();
+                quotaError.style.display = 'none';
+                showToast('Switched to Demo Mode', 'Info', 'bi bi-info-circle-fill text-primary');
             });
             
             // Auto-resize textarea
             chatInput.addEventListener('input', function() {
                 this.style.height = 'auto';
                 this.style.height = Math.min(this.scrollHeight, 150) + 'px';
+                
+                // Enable/disable send button
                 sendButton.disabled = !this.value.trim();
             });
             
-            // Notification close
-            notification.querySelector('.notification-close').addEventListener('click', function() {
-                notification.classList.remove('show');
-            });
-            
-            function updateApiStatus() {
-                if (apiKey) {
-                    statusBadge.className = 'status-badge status-connected';
-                    statusBadge.innerHTML = '<span class="status-dot"></span><span>Connected</span>';
-                    
-                    apiStatus.className = 'api-status connected';
-                    apiStatus.innerHTML = '<span class="status-dot"></span><span>Connected to OpenAI API</span>';
-                    
-                    disconnectApiBtn.style.display = 'block';
-                } else {
+            function updateUI() {
+                // Update status badge
+                if (hasQuotaError) {
+                    statusBadge.className = 'status-badge status-error';
+                    statusBadge.innerHTML = '<i class="bi bi-circle-fill"></i> Quota Exceeded';
+                } else if (isDemoMode) {
                     statusBadge.className = 'status-badge status-demo';
-                    statusBadge.innerHTML = '<span class="status-dot"></span><span>Demo Mode</span>';
-                    
-                    apiStatus.className = 'api-status demo';
-                    apiStatus.innerHTML = '<span class="status-dot"></span><span>Currently running in demo mode with simulated responses</span>';
-                    
-                    disconnectApiBtn.style.display = 'none';
-                }
-            }
-            
-            function loadChatSessions() {
-                chatHistory.innerHTML = '';
-                
-                if (chatSessions.length === 0) {
-                    return;
+                    statusBadge.innerHTML = '<i class="bi bi-circle-fill"></i> Demo Mode';
+                } else {
+                    statusBadge.className = 'status-badge status-connected';
+                    statusBadge.innerHTML = '<i class="bi bi-circle-fill"></i> Connected';
                 }
                 
-                chatSessions.forEach(session => {
-                    const sessionItem = document.createElement('div');
-                    sessionItem.className = 'chat-history-item';
-                    if (session.id === currentSessionId) {
-                        sessionItem.classList.add('active');
-                    }
-                    
-                    sessionItem.innerHTML = `
-                        <i class="bi bi-chat-dots chat-history-icon"></i>
-                        <div class="chat-history-title">${session.title}</div>
-                    `;
-                    
-                    sessionItem.addEventListener('click', function() {
-                        loadChatSession(session.id);
-                    });
-                    
-                    chatHistory.appendChild(sessionItem);
-                });
-            }
-            
-            function loadChatSession(sessionId) {
-                const session = chatSessions.find(s => s.id === sessionId);
-                if (!session) return;
-                
-                currentSessionId = sessionId;
-                conversationHistory = [...session.messages];
-                
-                // Update UI
-                chatTitle.textContent = session.title;
-                welcomeScreen.style.display = 'none';
-                
-                // Clear existing messages
-                const messages = messagesContainer.querySelectorAll('.message');
-                messages.forEach(message => message.remove());
-                
-                // Load messages
-                session.messages.forEach(message => {
-                    addMessageToUI(message.role, message.content);
-                });
-                
-                // Update active state in sidebar
-                document.querySelectorAll('.chat-history-item').forEach((item, index) => {
-                    if (chatSessions[index].id === sessionId) {
-                        item.classList.add('active');
-                    } else {
-                        item.classList.remove('active');
-                    }
-                });
-                
-                // Close sidebar on mobile
-                if (window.innerWidth <= 768) {
-                    sidebar.classList.remove('open');
+                // Update model badge
+                if (isDemoMode) {
+                    currentModelBadge.textContent = 'Demo Mode';
+                } else {
+                    currentModelBadge.textContent = model;
                 }
-            }
-            
-            function startNewChat() {
-                currentSessionId = Date.now().toString();
-                conversationHistory = [];
                 
-                // Clear messages
-                const messages = messagesContainer.querySelectorAll('.message');
-                messages.forEach(message => message.remove());
-                
-                // Show welcome screen
-                welcomeScreen.style.display = 'flex';
-                chatTitle.textContent = 'New Conversation';
-                
-                // Update active state in sidebar
-                document.querySelectorAll('.chat-history-item').forEach(item => {
-                    item.classList.remove('active');
-                });
-                
-                // Close sidebar on mobile
-                if (window.innerWidth <= 768) {
-                    sidebar.classList.remove('open');
-                }
-            }
-            
-            function clearCurrentChat() {
-                if (conversationHistory.length === 0) return;
-                
-                if (confirm('Are you sure you want to clear the current conversation?')) {
-                    // If this is a saved session, remove it
-                    if (currentSessionId) {
-                        chatSessions = chatSessions.filter(s => s.id !== currentSessionId);
-                        localStorage.setItem('chat_sessions', JSON.stringify(chatSessions));
-                        loadChatSessions();
-                    }
-                    
-                    startNewChat();
-                }
-            }
-            
-            function toggleSidebar() {
-                sidebar.classList.toggle('open');
-            }
-            
-            function handleKeyDown(e) {
-                if (e.key === 'Enter' && !e.shiftKey) {
-                    e.preventDefault();
-                    sendMessage();
-                }
+                // Enable/disable send button
+                sendButton.disabled = !chatInput.value.trim();
             }
             
             function sendMessage() {
@@ -1176,6 +912,11 @@
                 // Hide welcome screen if visible
                 if (welcomeScreen.style.display !== 'none') {
                     welcomeScreen.style.display = 'none';
+                }
+                
+                // Hide quota error if visible
+                if (quotaError.style.display !== 'none') {
+                    quotaError.style.display = 'none';
                 }
                 
                 // Add user message to UI
@@ -1190,30 +931,28 @@
                 // Clear input
                 chatInput.value = '';
                 chatInput.style.height = 'auto';
-                sendButton.disabled = true;
                 
                 // Show typing indicator
                 typingIndicator.style.display = 'block';
                 messagesContainer.scrollTop = messagesContainer.scrollHeight;
                 
-                // Get response
-                if (apiKey) {
-                    callOpenAIAPI();
-                } else {
-                    // Use demo response
+                // Call API or demo mode
+                if (isDemoMode || hasQuotaError) {
+                    // Demo mode - simulate response after delay
                     setTimeout(() => {
-                        const randomResponse = demoResponses[Math.floor(Math.random() * demoResponses.length)];
-                        addMessageToUI('assistant', randomResponse);
+                        typingIndicator.style.display = 'none';
+                        const demoResponse = generateDemoResponse(message);
+                        addMessageToUI('assistant', demoResponse);
                         
                         // Add to conversation history
                         conversationHistory.push({
                             role: 'assistant',
-                            content: randomResponse
+                            content: demoResponse
                         });
-                        
-                        // Hide typing indicator
-                        typingIndicator.style.display = 'none';
-                    }, 1000);
+                    }, 1500);
+                } else {
+                    // Real API call
+                    callOpenAIAPI();
                 }
             }
             
@@ -1256,13 +995,33 @@
                                 },
                                 ...conversationHistory
                             ],
-                            temperature: 0.7,
+                            temperature: temperature,
                             max_tokens: 1000
                         })
                     });
                     
                     if (!response.ok) {
                         const errorData = await response.json();
+                        
+                        // Check for quota exceeded error
+                        if (errorData.error?.code === 'insufficient_quota' || 
+                            errorData.error?.message?.includes('quota') ||
+                            errorData.error?.message?.includes('billing')) {
+                            hasQuotaError = true;
+                            updateUI();
+                            
+                            // Hide typing indicator
+                            typingIndicator.style.display = 'none';
+                            
+                            // Show quota error message
+                            quotaError.style.display = 'block';
+                            
+                            // Show notification
+                            showToast('API quota exceeded. Please upgrade your plan or switch to demo mode.', 'Quota Exceeded', 'bi bi-exclamation-triangle-fill text-warning');
+                            
+                            return;
+                        }
+                        
                         throw new Error(errorData.error?.message || 'API request failed');
                     }
                     
@@ -1288,132 +1047,44 @@
                     typingIndicator.style.display = 'none';
                     
                     // Show error message
-                    showNotification('error', 'API Error', error.message);
+                    showToast(`Error: ${error.message}`, 'Error', 'bi bi-exclamation-triangle-fill text-danger');
                 }
             }
             
-            function openApiSettings() {
-                apiKeyInput.value = apiKey;
-                modelSelect.value = model;
-                systemPrompt.value = systemPromptText;
-                apiSettingsModal.style.display = 'flex';
-            }
-            
-            function closeApiSettingsModal() {
-                apiSettingsModal.style.display = 'none';
-            }
-            
-            function saveApiSettings() {
-                const newApiKey = apiKeyInput.value.trim();
-                const newModel = modelSelect.value;
-                const newSystemPrompt = systemPrompt.value.trim();
+            function generateDemoResponse(userMessage) {
+                // Simple demo responses based on keywords
+                const message = userMessage.toLowerCase();
                 
-                if (newApiKey) {
-                    apiKey = newApiKey;
-                    localStorage.setItem('openai_api_key', apiKey);
+                if (message.includes('hello') || message.includes('hi') || message.includes('hey')) {
+                    return "Hello! I'm a demo AI assistant. I can provide basic responses, but for more advanced capabilities, please add your OpenAI API key in the settings.";
                 }
                 
-                model = newModel;
-                localStorage.setItem('openai_model', model);
-                
-                systemPromptText = newSystemPrompt || 'You are a helpful assistant. Be concise and helpful in your responses.';
-                localStorage.setItem('system_prompt', systemPromptText);
-                
-                updateApiStatus();
-                closeApiSettingsModal();
-                
-                showNotification('success', 'Settings Saved', 'Your API settings have been saved successfully.');
-            }
-            
-            function disconnectApi() {
-                if (confirm('Are you sure you want to disconnect from the API? The app will return to demo mode.')) {
-                    apiKey = '';
-                    localStorage.removeItem('openai_api_key');
-                    updateApiStatus();
-                    closeApiSettingsModal();
-                    
-                    showNotification('info', 'API Disconnected', 'You are now using the app in demo mode.');
-                }
-            }
-            
-            function showNotification(type, title, message) {
-                const notificationEl = document.getElementById('notification');
-                const icon = notificationEl.querySelector('.notification-icon i');
-                const titleEl = notificationEl.querySelector('.notification-title');
-                const messageEl = notificationEl.querySelector('.notification-message');
-                
-                // Set notification type
-                notificationEl.className = `notification ${type}`;
-                
-                // Set icon based on type
-                if (type === 'success') {
-                    icon.className = 'bi bi-check';
-                } else if (type === 'error') {
-                    icon.className = 'bi bi-exclamation-triangle';
-                } else if (type === 'info') {
-                    icon.className = 'bi bi-info';
+                if (message.includes('help')) {
+                    return "I'm here to help! You can ask me questions, and I'll do my best to answer. In this demo mode, my responses are limited. For full functionality, add your OpenAI API key.";
                 }
                 
-                // Set content
-                titleEl.textContent = title;
-                messageEl.textContent = message;
+                if (message.includes('thank')) {
+                    return "You're welcome! Is there anything else I can help you with?";
+                }
                 
-                // Show notification
-                notificationEl.classList.add('show');
+                if (message.includes('api key')) {
+                    return "You can add your OpenAI API key by clicking the 'API Key' button in the top right corner. This will enable full functionality with advanced AI models.";
+                }
                 
-                // Auto hide after 5 seconds
-                setTimeout(() => {
-                    notificationEl.classList.remove('show');
-                }, 5000);
+                if (message.includes('demo')) {
+                    return "Yes, you're currently using the demo mode. To access the full capabilities of this AI agent, you'll need to add your OpenAI API key.";
+                }
+                
+                // Default response
+                return "I understand you're asking about: '" + userMessage + "'. In demo mode, I can only provide limited responses. To get more detailed and accurate answers, please add your OpenAI API key in the settings.";
             }
             
-            // Save chat session when user leaves the page
-            window.addEventListener('beforeunload', function() {
-                if (conversationHistory.length > 0) {
-                    // Create a title from the first user message
-                    const firstUserMessage = conversationHistory.find(m => m.role === 'user');
-                    const title = firstUserMessage 
-                        ? (firstUserMessage.content.length > 30 
-                            ? firstUserMessage.content.substring(0, 30) + '...' 
-                            : firstUserMessage.content)
-                        : 'New Conversation';
-                    
-                    // Update or create session
-                    if (currentSessionId) {
-                        const sessionIndex = chatSessions.findIndex(s => s.id === currentSessionId);
-                        if (sessionIndex !== -1) {
-                            chatSessions[sessionIndex] = {
-                                id: currentSessionId,
-                                title: title,
-                                messages: conversationHistory,
-                                timestamp: new Date().toISOString()
-                            };
-                        } else {
-                            chatSessions.push({
-                                id: currentSessionId,
-                                title: title,
-                                messages: conversationHistory,
-                                timestamp: new Date().toISOString()
-                            });
-                        }
-                    } else {
-                        currentSessionId = Date.now().toString();
-                        chatSessions.push({
-                            id: currentSessionId,
-                            title: title,
-                            messages: conversationHistory,
-                            timestamp: new Date().toISOString()
-                        });
-                    }
-                    
-                    // Keep only the 20 most recent sessions
-                    if (chatSessions.length > 20) {
-                        chatSessions = chatSessions.slice(-20);
-                    }
-                    
-                    localStorage.setItem('chat_sessions', JSON.stringify(chatSessions));
-                }
-            });
+            function showToast(message, header, iconClass) {
+                toastMessage.textContent = message;
+                toastHeader.textContent = header;
+                toastIcon.className = iconClass + ' me-2';
+                toastNotification.show();
+            }
         });
     </script>
 </body>
